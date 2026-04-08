@@ -22,7 +22,7 @@ impl<T> Process<T> {
         }
     }
 
-    pub fn is_finished(&self) -> bool {
+    pub fn finished(&self) -> bool {
         self.finished && self.next.is_empty()
     }
 
@@ -56,7 +56,7 @@ impl<T> Process<T> {
     fn tick_next(&mut self, delta: Duration, context: &mut T) {
         self.next.retain_mut(|process| {
             process.tick(delta, context);
-            !process.is_finished()
+            !process.finished()
         });
     }
 }

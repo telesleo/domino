@@ -10,7 +10,7 @@ impl<T> Scheduler<T> {
         Self { processes: Vec::new() }
     }
 
-    pub fn is_finished(&self) -> bool {
+    pub fn finished(&self) -> bool {
         self.processes.is_empty()
     }
 
@@ -22,7 +22,7 @@ impl<T> Scheduler<T> {
     pub fn tick(&mut self, delta: Duration, context: &mut T) {
         self.processes.retain_mut(|process| {
             process.tick(delta, context);
-            !process.is_finished()
+            !process.finished()
         });
     }
 }
